@@ -1,0 +1,41 @@
+img {
+  max-width: 100vw;
+  /* min-width: 1000px; */
+}
+
+.popup {
+  width: 9vw;
+  height: auto;
+  background-color: rgb(158, 96, 158);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  color: white;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
+.option {
+  border: 1px solid white;
+  display: flex;
+  align-self: stretch;
+  justify-content: center;
+  padding: 10px;
+}
+
+.option:hover {
+  background-color: pink;
+  cursor: pointer;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible;
+}
