@@ -9,8 +9,12 @@ function Legend({ found }) {
   return (
     <div className={styles.container}>
       <div className={styles.leftside}>
-        <h2 className={styles.title}>where's whiskers?</h2>
-        <span>Yadda YaddaYadda YaddaYadda YaddaYadda YaddaYadda Yadda</span>
+        <h2 className={styles.title}>Where's Whiskers?</h2>
+        <span className={styles.desc}>
+          Whiskers and her pals are at the beach, and it's crowded! Can you find
+          all 5 of our furry friends? Click around and find out. Hurry up,
+          clock's ticking!
+        </span>
       </div>
       <div className={styles.icongrid}>
         <div className={styles.iconbox}>

@@ -8,6 +8,8 @@ function Drawing({ found, setFound }) {
   const [showhide, setShowhide] = useState(false);
   const [cssPos, setCssPos] = useState({ left: 0, top: 0 });
   const [positions, setPositions] = useState({ x: 0, y: 0 });
+  const [leader, setLeader] = useState(false);
+  const [modal, setModal] = useState(true);
 
   //Effect to make sure dimensions are accurate if resized / different viewports
   useEffect(() => {
@@ -29,20 +31,36 @@ function Drawing({ found, setFound }) {
     }
   }, []);
 
+  const startGame = () => {
+    if (modal == true) {
+      setModal(false);
+    }
+    // send start time to backend
+  };
+
   const showMenu = (event) => {
-    setPositions({
-      x: Math.round(100 * (event.clientX / dimensions.width)),
-      y: Math.round(
-        (100 * (event.clientY - (window.innerHeight - dimensions.height) / 2)) /
-          dimensions.height
-      ),
-    });
-    console.log("x" + positions.x + "y" + positions.y);
-    setCssPos({
-      left: event.clientX,
-      top: event.clientY,
-    });
-    setShowhide(true);
+    if (showhide == true) {
+      //if they're clicking away when menu is already open
+      setShowhide(false);
+    } else if (modal == false) {
+      //otherwise show the menu
+      //setPositions calculates where click is in image based on viewport
+      setPositions({
+        x: Math.round(100 * (event.clientX / dimensions.width)),
+        y: Math.round(
+          (100 *
+            (event.clientY - (window.innerHeight - dimensions.height) / 2)) /
+            dimensions.height
+        ),
+      });
+      console.log("x" + positions.x + "y" + positions.y);
+      //setCssPos sets where the user clicks so menu appears at same point
+      setCssPos({
+        left: event.clientX,
+        top: event.clientY,
+      });
+      setShowhide(true);
+    }
   };
 
   const submitGuess = (name) => {
@@ -59,15 +77,24 @@ function Drawing({ found, setFound }) {
       }
     });
     setFound(temp);
-    //IF User guesses correctly----------//
 
+    //if all are true and game is over
+    if (Object.values(temp).reduce((acc, curr) => acc * curr) == 1) {
+      let userinput = prompt("congrats! you found em all!", "enter name");
+      //send userinput to backend
+      setLeader(true);
+    }
+
+    //close menu after guess
     setShowhide(false);
-    console.log(found);
   };
 
   return (
     <>
+      {/* where's whiskers image */}
       <img ref={myImg} src={waldo} onClick={showMenu}></img>
+
+      {/* Pop-up menu */}
       <div
         className={`${styles.popup} ${showhide ? styles.show : styles.hide}`}
         style={cssPos}
@@ -87,9 +114,20 @@ function Drawing({ found, setFound }) {
         <div className={styles.option} onClick={() => submitGuess("duke")}>
           Duke
         </div>
-        <div className={styles.option} onClick={() => submitGuess("")}>
-          Oops..n/m
-        </div>
+      </div>
+
+      {/* leaderboard */}
+      <div className={`${styles.leader} ${leader ? styles.show : styles.hide}`}>
+        <div className={styles.leadertitle}>🐈 Whiskers Leaderboard 🐈</div>
+        {/* grab leaderboard from backend */}
+      </div>
+
+      {/* start modal */}
+      <div
+        className={`${styles.welcome} ${modal ? styles.show : styles.hide}`}
+        onClick={startGame}
+      >
+        <h1>Start Game</h1>
       </div>
     </>
   );

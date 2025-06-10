@@ -16,6 +16,7 @@ function App() {
 
   return (
     <>
+      <div className="modal"></div>
       <div className="container">
         <Legend found={found} setFound={setFound}></Legend>
         <Drawing found={found} setFound={setFound}></Drawing>
