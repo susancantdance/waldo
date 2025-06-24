@@ -10,6 +10,7 @@ function Drawing({ found, setFound }) {
   const [positions, setPositions] = useState({ x: 0, y: 0 });
   const [leader, setLeader] = useState(false);
   const [modal, setModal] = useState(true);
+  let userId;
 
   //Effect to make sure dimensions are accurate if resized / different viewports
   useEffect(() => {
@@ -31,16 +32,30 @@ function Drawing({ found, setFound }) {
     }
   }, []);
 
-  const startGame = () => {
+  //
+
+  const startGame = async () => {
     if (modal == true) {
-      setModal(false);
+      // send start time to backend
+      try {
+        const response = await fetch(`http://localhost:3000`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ start: Date.now() }),
+        });
+        userId = await response.json();
+        console.log(userId);
+        setModal(false);
+      } catch (err) {
+        console.error(JSON.stringify(err));
+        alert("there has been an error!");
+      }
     }
-    // send start time to backend
   };
 
   const showMenu = (event) => {
-    if (showhide == true) {
-      //if they're clicking away when menu is already open
+    if (showhide == true || leader == true) {
+      //if they're clicking away when menu is already open OR leaderboard is open
       setShowhide(false);
     } else if (modal == false) {
       //otherwise show the menu
@@ -63,26 +78,50 @@ function Drawing({ found, setFound }) {
     }
   };
 
-  const submitGuess = (name) => {
-    console.log("is " + name + " at " + positions.x + " " + positions.y);
+  const submitGuess = async (name) => {
+    console.log("is " + name + " at " + positions.x + " " + positions.y + "?");
+    let coords;
+    /* is it correct? get the coordinates of friend in question */
+    try {
+      const response = await fetch(`http://localhost:3000/guess`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: name }),
+      });
+      console.log(response);
+      coords = await response.json();
+      console.log(coords);
 
-    /* is it correct? */
+      if (
+        positions.x <= coords.x2 &&
+        positions.x >= coords.x1 &&
+        positions.y >= coords.y1 &&
+        positions.y <= coords.y2
+      ) {
+        console.log("YOU FOUND " + name + "!!!!");
+        //IF user guesses correctly, update who's been found----------//
+        let temp = { ...found };
+        Object.keys(temp).forEach((key) => {
+          if (key == name) {
+            console.log(key + " " + name);
+            temp[key] = true;
+          }
+        });
+        setFound(temp);
 
-    //IF user guesses correctly----------//
-    let temp = { ...found };
-    Object.keys(temp).forEach((key) => {
-      if (key == name) {
-        console.log(key + " " + name);
-        temp[key] = true;
+        //if all are true and game is over
+        if (Object.values(temp).reduce((acc, curr) => acc * curr) == 1) {
+          //   let userinput =
+          prompt("congrats! you found em all!", "enter name");
+          //send userinput to backend
+          setLeader(true);
+        }
+      } else {
+        console.log("SORRY TRY AGAIN");
       }
-    });
-    setFound(temp);
-
-    //if all are true and game is over
-    if (Object.values(temp).reduce((acc, curr) => acc * curr) == 1) {
-      let userinput = prompt("congrats! you found em all!", "enter name");
-      //send userinput to backend
-      setLeader(true);
+    } catch (err) {
+      console.log(JSON.stringify(err));
+      alert("theres been an error");
     }
 
     //close menu after guess
