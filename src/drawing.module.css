@@ -63,7 +63,7 @@ img {
 }
 
 .leader {
-  width: 30vw;
+  width: 35vw;
   height: 50vh;
   position: absolute;
   top: 50%;
@@ -76,7 +76,17 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 15px 15px 25px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.leadertop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .leadertitle {
@@ -86,10 +96,61 @@ img {
   font-family: "Cherry Bomb One", system-ui;
 }
 
+.leaderlist {
+  width: 70%;
+  margin-top: 30px;
+}
+
+.leaderline {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: rgb(194, 82, 136);
+  font-weight: bold;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.leadercolumn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: rgb(144, 55, 98);
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: underline;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.playagain {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: white;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  color: pink;
+  font-weight: bold;
+  font-family: "Cherry Bomb One", system-ui;
+  font-size: 20px;
+  box-shadow: 5px 5px 2px 1px rgba(58, 3, 117, 0.401);
+}
+
+.playagain:hover {
+  background-color: rgb(195, 148, 156);
+}
+
 .hide {
   visibility: hidden;
 }
 
 .show {
   visibility: visible;
+}
+
+.start {
+  font-size: 50px;
+  padding: 20px;
 }

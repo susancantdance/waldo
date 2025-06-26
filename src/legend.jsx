@@ -4,16 +4,23 @@ import bunbun from "./assets/bunbun.jpeg";
 import whiskers from "./assets/whiskers.jpeg";
 import crybear from "./assets/crybear.jpeg";
 import duke from "./assets/duke.jpeg";
+import { useEffect, useRef } from "react";
 
-function Legend({ found }) {
+function Legend({ found, setHeaderheight }) {
+  const headerRef = useRef(null);
+  useEffect(() => {
+    if (headerRef.current) {
+      setHeaderheight(headerRef.current.clientHeight);
+    }
+  }, []);
+
   return (
-    <div className={styles.container}>
+    <div ref={headerRef} className={styles.container}>
       <div className={styles.leftside}>
         <h2 className={styles.title}>Where's Whiskers?</h2>
         <span className={styles.desc}>
           Whiskers and her pals are at the beach, and it's crowded! Can you find
-          all 5 of our furry friends? Click around and find out. Hurry up,
-          clock's ticking!
+          all 5 of our furry friends? Hurry up, clock's ticking!
         </span>
       </div>
       <div className={styles.icongrid}>

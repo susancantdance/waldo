@@ -13,13 +13,18 @@ function App() {
     crybear: false,
     duke: false,
   });
+  const [headerHeight, setHeaderheight] = useState(0);
 
   return (
     <>
       <div className="modal"></div>
       <div className="container">
-        <Legend found={found} setFound={setFound}></Legend>
-        <Drawing found={found} setFound={setFound}></Drawing>
+        <Legend found={found} setHeaderheight={setHeaderheight}></Legend>
+        <Drawing
+          found={found}
+          setFound={setFound}
+          headerHeight={headerHeight}
+        ></Drawing>
         {/* <Footer></Footer> */}
       </div>
     </>
