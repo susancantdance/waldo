@@ -9,6 +9,5 @@ body {
   flex-direction: column;
 }
 
-/* .modal {
-
-} */
+@media (max-width: 599px) {
+}

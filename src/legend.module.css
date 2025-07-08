@@ -75,3 +75,161 @@
   padding: 20px;
   width: 30vw;
 }
+
+@media (max-width: 599px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* margin: 0px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px 0px 50px;
+    background-color: white; */
+  }
+
+  .leftside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* justify-items: flex-start;
+    align-items: center;
+    gap: 25px;
+    color: black;
+    margin-right: 30px; */
+  }
+
+  .icongrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .iconbox {
+    justify-self: center;
+    align-self: center;
+    /* background-color: blue; */
+    position: relative;
+  }
+
+  .icon {
+    max-height: 60px;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .heart {
+    position: absolute;
+    color: rgb(244, 97, 197);
+    font-size: 50px;
+    top: 50%;
+    left: 0px;
+    line-height: 10px;
+  }
+
+  .show {
+    visibility: visible;
+  }
+
+  .hide {
+    visibility: hidden;
+  }
+
+  .name {
+    font-weight: bold;
+    font-size: 12px;
+    justify-self: center;
+    color: black;
+  }
+
+  .title {
+    font-size: 30px;
+    color: black;
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    padding: 0px;
+    line-height: 40px;
+  }
+
+  .desc {
+    /* padding: 20px;
+    width: 30vw; */
+    visibility: hidden;
+    position: fixed;
+  }
+}
+
+@media (max-height: 500px) {
+  .desc {
+    /* padding: 20px;
+    width: 30vw; */
+    /* visibility: hidden; */
+    /* position: fixed; */
+    font-size: 12px;
+  }
+
+  .container {
+    display: flex;
+    margin: 0px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px 0px 20px;
+    background-color: white;
+  }
+
+  .leftside {
+    display: flex;
+    justify-items: flex-start;
+    align-items: center;
+
+    color: black;
+    margin-right: 10px;
+  }
+
+  .icongrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 10px;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 22px;
+    color: black;
+    font-family: "Cherry Bomb One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    padding: 0px;
+    line-height: 22px;
+  }
+
+  .desc {
+    padding: 10px;
+    width: 30vw;
+  }
+
+  .iconbox {
+    justify-self: center;
+    align-self: center;
+    /* background-color: blue; */
+    position: relative;
+  }
+
+  .icon {
+    max-height: 40px;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .heart {
+    position: absolute;
+    color: rgb(244, 97, 197);
+    font-size: 40px;
+    top: 50%;
+    left: -3px;
+    line-height: 10px;
+  }
+}

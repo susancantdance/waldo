@@ -1,23 +1,46 @@
 import waldo from "./assets/waldo.jpg";
 import styles from "./drawing.module.css";
 import { useRef, useState, useEffect } from "react";
+// import { ConfettiFunc } from "./confetti";
 
 function Drawing({ found, setFound, headerHeight }) {
   const myImg = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [showhide, setShowhide] = useState(false);
   const [cssPos, setCssPos] = useState({ left: 0, top: 0 });
+  //   const [confet, setConfet] = useState({ x: 0, y: 0, w: 50, h: 50 });
   const [positions, setPositions] = useState({ x: 0, y: 0 });
   const [leader, setLeader] = useState(false);
   const [modal, setModal] = useState(true);
   const [userId, setUserid] = useState(0);
   const [top, setTop] = useState([]);
+  const [guessRight, setGuessright] = useState(false);
+  const [guessWrong, setGuesswrong] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:3000/delete`, {
       method: "DELETE",
     }).then((response) => response.json());
   }, []);
+
+  useEffect(() => {
+    if (guessRight) {
+      // Only set timeout if popup is currently visible
+      const timer = setTimeout(() => {
+        setGuessright(false);
+      }, 1200); // Popup disappears after 5 seconds (5000 milliseconds)
+      return () => clearTimeout(timer);
+    } else if (guessWrong) {
+      // Only set timeout if popup is currently visible
+      const timer = setTimeout(() => {
+        setGuesswrong(false);
+      }, 1200); // Popup disappears after 5 seconds (5000 milliseconds)
+      return () => clearTimeout(timer);
+    }
+
+    // Cleanup function to clear the timeout if the component unmounts
+    // or if showPopup changes before the timeout completes
+  }, [guessRight, guessWrong]); // Re-run effect if showPopup changes
 
   //Effect to make sure dimensions are accurate if resized / different viewports
   //   useEffect(() => {
@@ -83,6 +106,8 @@ function Drawing({ found, setFound, headerHeight }) {
     if (showhide == true || leader == true) {
       //if they're clicking away when menu is already open OR leaderboard is open
       setShowhide(false);
+    } else if (guessRight == true) {
+      setGuessright(false);
     } else if (modal == false) {
       //otherwise show the menu
       //setPositions calculates where click is in image based on viewport
@@ -136,18 +161,22 @@ function Drawing({ found, setFound, headerHeight }) {
             temp[key] = true;
           }
         });
+        // setConfet({ x: cssPos.left, y: cssPos.top, w: 50, h: 50 });
         setFound(temp);
+        setGuessright(true);
 
         //if all are true and game is over
         if (Object.values(temp).reduce((acc, curr) => acc * curr) == 1) {
           let winner = prompt("congrats! you found em all!", "enter name");
           //send userinput to backend
           sendWinner(winner);
+          setGuessright(false);
+          setShowhide(false);
           setLeader(true);
         }
       } else {
         console.log("SORRY TRY AGAIN");
-        alert("Nope! Try again!");
+        setGuesswrong(true);
       }
     } catch (err) {
       console.log(JSON.stringify(err));
@@ -197,8 +226,14 @@ function Drawing({ found, setFound, headerHeight }) {
   return (
     <>
       {/* where's whiskers image */}
-      <img ref={myImg} src={waldo} onClick={showMenu} onLoad={handleImg}></img>
-
+      <div className={styles.imgdiv}>
+        <img
+          ref={myImg}
+          src={waldo}
+          onClick={showMenu}
+          onLoad={handleImg}
+        ></img>
+      </div>
       {/* Pop-up menu */}
       <div
         className={`${styles.popup} ${showhide ? styles.show : styles.hide}`}
@@ -219,6 +254,20 @@ function Drawing({ found, setFound, headerHeight }) {
         <div className={styles.option} onClick={() => submitGuess("duke")}>
           Duke
         </div>
+      </div>
+
+      {/* Winning pop up */}
+      <div
+        className={`${styles.winner} ${guessRight ? styles.show : styles.hide}`}
+      >
+        <span>&#x2764;&#xfe0f; Good eye! &#x2764;&#xfe0f;</span>
+      </div>
+
+      {/* Wrong guess pop up */}
+      <div
+        className={`${styles.wrong} ${guessWrong ? styles.show : styles.hide}`}
+      >
+        <span>&#128542; oops, try again &#128542;</span>
       </div>
 
       {/* leaderboard */}
@@ -253,6 +302,17 @@ function Drawing({ found, setFound, headerHeight }) {
       >
         <span className={styles.start}>Start Game</span>
       </div>
+
+      {/* mobile portrait modal */}
+      <div
+        className={`${styles.portrait} ${modal ? styles.show : styles.hide}`}
+      >
+        <span className={styles.start}>Wait!</span>
+        <span className={styles.message}>(Flip your phone to landscape!)</span>
+      </div>
+
+      {/* confetti */}
+      {/* <ConfettiFunc position={confet} /> */}
     </>
   );
 }

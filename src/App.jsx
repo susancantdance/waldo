@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 // import waldo from "./assets/waldo.jpg";
 import { Drawing } from "./drawing.jsx";
@@ -14,6 +14,22 @@ function App() {
     duke: false,
   });
   const [headerHeight, setHeaderheight] = useState(0);
+
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      // Reload the page when orientation changes
+      window.location.reload();
+    };
+
+    // Add event listener for orientation changes
+    // Alternatively, you could use 'resize' event for broader compatibility
+    window.addEventListener("orientationchange", handleOrientationChange);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("orientationchange", handleOrientationChange);
+    };
+  }, []); // Empty dependency array ensures this effect runs only once on mount
 
   return (
     <>
