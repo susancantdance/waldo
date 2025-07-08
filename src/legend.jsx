@@ -12,7 +12,7 @@ function Legend({ found, setHeaderheight }) {
     if (headerRef.current) {
       setHeaderheight(headerRef.current.clientHeight);
     }
-  }, []);
+  }, [setHeaderheight]);
 
   return (
     <div ref={headerRef} className={styles.container}>

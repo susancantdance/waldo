@@ -18,7 +18,8 @@ function Drawing({ found, setFound, headerHeight }) {
   const [guessWrong, setGuesswrong] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/delete`, {
+    // fetch(`http://localhost:3000/delete`, {
+    fetch(`${import.meta.env.VITE_DB_URL}/delete`, {
       method: "DELETE",
     }).then((response) => response.json());
   }, []);
@@ -79,7 +80,8 @@ function Drawing({ found, setFound, headerHeight }) {
       // send start time to backend
 
       try {
-        const response = await fetch(`http://localhost:3000`, {
+        // const response = await fetch(`http://localhost:3000`, {
+        const response = await fetch(import.meta.env.VITE_DB_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ start: Date.now() }),
@@ -137,7 +139,8 @@ function Drawing({ found, setFound, headerHeight }) {
     let coords;
     /* is it correct? get the coordinates of friend in question */
     try {
-      const response = await fetch(`http://localhost:3000/guess`, {
+      // const response = await fetch(`http://localhost:3000/guess`, {
+      const response = await fetch(`${import.meta.env.VITE_DB_URL}/guess`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: name }),
@@ -190,7 +193,8 @@ function Drawing({ found, setFound, headerHeight }) {
   const sendWinner = async (winner) => {
     console.log(`winner ${winner} and id : ${userId}`);
     try {
-      const response = await fetch(`http://localhost:3000/winner`, {
+      // const response = await fetch(`http://localhost:3000/winner`, {
+      const response = await fetch(`${import.meta.env.VITE_DB_URL}/winner`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: userId, name: winner }),
@@ -205,7 +209,8 @@ function Drawing({ found, setFound, headerHeight }) {
 
   const getTop = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/leader`, {
+      // const response = await fetch(`http://localhost:3000/leader`, {
+      const response = await fetch(`${import.meta.env.VITE_DB_URL}/leader`, {
         method: "GET",
       });
       let data = await response.json();
