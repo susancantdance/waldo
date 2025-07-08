@@ -19,7 +19,7 @@ function Drawing({ found, setFound, headerHeight }) {
 
   useEffect(() => {
     // fetch(`http://localhost:3000/delete`, {
-    fetch(`${import.meta.env.VITE_DB_URL}/delete`, {
+    fetch(`https://${import.meta.env.VITE_DB_URL}/delete`, {
       method: "DELETE",
     }).then((response) => response.json());
   }, []);
@@ -81,7 +81,7 @@ function Drawing({ found, setFound, headerHeight }) {
 
       try {
         // const response = await fetch(`http://localhost:3000`, {
-        const response = await fetch(import.meta.env.VITE_DB_URL, {
+        const response = await fetch(`${import.meta.env.VITE_DB_URL}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ start: Date.now() }),
