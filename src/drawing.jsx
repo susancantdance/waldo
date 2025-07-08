@@ -19,7 +19,7 @@ function Drawing({ found, setFound, headerHeight }) {
 
   useEffect(() => {
     // fetch(`http://localhost:3000/delete`, {
-    fetch(`https://${import.meta.env.VITE_DB_URL}/delete`, {
+    fetch(`${import.meta.env.VITE_DB_URL}/delete`, {
       method: "DELETE",
     }).then((response) => response.json());
   }, []);
