@@ -193,7 +193,7 @@ function Drawing({ found, setFound, headerHeight }) {
 
         //if all are true and game is over
         if (Object.values(temp).reduce((acc, curr) => acc * curr) == 1) {
-          let winner = prompt("congrats! you found em all!", "enter name");
+          let winner = prompt("congrats! you found em all! Enter your name!");
           //send userinput to backend
           sendWinner(winner);
           setGuessright(false);
