@@ -1,5 +1,6 @@
 import styles from "./drawing.module.css";
 import { useRef, useState, useEffect } from "react";
+import { Whiskers } from "./whiskers.jsx";
 // import { ConfettiFunc } from "./confetti";
 
 function Drawing({ found, setFound, headerHeight }) {
