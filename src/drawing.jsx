@@ -43,36 +43,36 @@ function Drawing({ found, setFound, headerHeight }) {
     // or if showPopup changes before the timeout completes
   }, [guessRight, guessWrong]); // Re-run effect if showPopup changes
 
-  //Effect to make sure dimensions are accurate if resized / different viewports
-  //   useEffect(() => {
-  //     if (myImg.current) {
-  //       const observer = new ResizeObserver((entries) => {
-  //         for (let entry of entries) {
-  //           setDimensions({
-  //             width: entry.contentRect.width,
-  //             height: entry.contentRect.height,
-  //           });
-  //           console.log("img width " + entry.contentRect.width);
-  //           console.log("img height " + entry.contentRect.height);
-  //         }
-  //       });
+  // Effect to make sure dimensions are accurate if resized / different viewports
+  useEffect(() => {
+    if (myImg.current) {
+      const observer = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          setDimensions({
+            width: entry.contentRect.width,
+            height: entry.contentRect.height,
+          });
+          console.log("img width " + entry.contentRect.width);
+          console.log("img height " + entry.contentRect.height);
+        }
+      });
 
-  //       observer.observe(myImg.current);
+      observer.observe(myImg.current);
 
-  //       return () => {
-  //         observer.disconnect();
-  //       };
-  //     }
-  //   }, []);
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
 
-  const handleImg = (event) => {
-    setDimensions({
-      width: event.target.clientWidth,
-      height: event.target.clientHeight,
-    });
-    console.log("img width " + event.target.clientWidth);
-    console.log("img height " + event.target.clientHeight);
-  };
+  // const handleImg = (event) => {
+  //   setDimensions({
+  //     width: event.target.clientWidth,
+  //     height: event.target.clientHeight,
+  //   });
+  //   console.log("img width " + event.target.clientWidth);
+  //   console.log("img height " + event.target.clientHeight);
+  // };
 
   const startGame = async () => {
     //if start game is open or leaderboard is open
@@ -236,7 +236,7 @@ function Drawing({ found, setFound, headerHeight }) {
           ref={myImg}
           src={waldo}
           onClick={showMenu}
-          onLoad={handleImg}
+          //          onLoad={handleImg}
         ></img>
       </div>
       {/* Pop-up menu */}
