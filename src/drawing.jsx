@@ -1,4 +1,3 @@
-import waldo from "./assets/waldo.jpg";
 import styles from "./drawing.module.css";
 import { useRef, useState, useEffect } from "react";
 // import { ConfettiFunc } from "./confetti";
@@ -36,8 +35,8 @@ function Drawing({ found, setFound, headerHeight }) {
           width: myImg.current.offsetWidth,
           height: myImg.current.offsetHeight,
         });
-        console.log("img width " + myImg.current.offsetWidth);
-        console.log("img height " + myImg.current.offsetHeight);
+        console.log("landscape img width " + myImg.current.offsetWidth);
+        console.log("landscape img height " + myImg.current.offsetHeight);
       }
     };
 
@@ -256,14 +255,15 @@ function Drawing({ found, setFound, headerHeight }) {
   return (
     <>
       {/* where's whiskers image */}
-      <div className={styles.imgdiv}>
+      {/* <div className={styles.imgdiv}>
         <img
           ref={myImg}
           src={waldo}
           onClick={showMenu}
           onLoad={handleImg}
         ></img>
-      </div>
+      </div> */}
+      <Whiskers myImg={myImg} showMenu={showMenu} handleImg={handleImg} />
       {/* Pop-up menu */}
       <div
         className={`${styles.popup} ${showhide ? styles.show : styles.hide}`}
