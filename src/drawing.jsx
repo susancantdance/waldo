@@ -25,6 +25,25 @@ function Drawing({ found, setFound, headerHeight }) {
   }, []);
 
   useEffect(() => {
+    const handleOrientationChange = () => {
+      // Reload the page when orientation changes
+      if (
+        screen.orientation.type == "landscape-primary" ||
+        screen.orientation.type == "landscape-secondary"
+      ) {
+        setModal(false);
+      }
+    };
+
+    screen.orientation.addEventListener("change", handleOrientationChange);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      screen.orientation.removeEventListener("change", handleOrientationChange);
+    };
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
+  useEffect(() => {
     if (guessRight) {
       // Only set timeout if popup is currently visible
       const timer = setTimeout(() => {

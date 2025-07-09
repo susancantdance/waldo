@@ -182,7 +182,7 @@ img {
 
 @media (max-width: 599px) {
   .portrait {
-    width: 50vw;
+    width: 80vw;
     height: auto;
     position: absolute;
     top: 30%;
@@ -198,10 +198,11 @@ img {
     justify-content: center;
     padding: 10px;
     font-size: 20px;
-    color: white;
+    color: rgb(108, 12, 156);
     font-weight: bold;
-    font-family: "Cherry Bomb One", system-ui;
+    font-family: Georgia, "Times New Roman", Times, serif;
     cursor: pointer;
+    visibility: visible;
   }
 
   .welcome {
@@ -316,12 +317,12 @@ img {
   }
 
   .welcome {
-    width: 30vw;
+    width: 50vw;
     height: auto;
     position: absolute;
     top: 60%;
     left: 50%;
-    transform: translate(-50%, -30%);
+    transform: translate(-50%, -60%);
     /* visibility: hidden; */
   }
 
