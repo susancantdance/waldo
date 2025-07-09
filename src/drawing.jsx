@@ -138,22 +138,20 @@ function Drawing({ found, setFound, headerHeight }) {
     } else if (modal == false) {
       //otherwise show the menu
       //setPositions calculates where click is in image based on viewport
-      console.log("client-x " + event.clientX);
-      console.log("client-y " + event.clientY);
+      console.log("page-x " + event.pageX);
+      console.log("page-y " + event.pageY);
 
       console.log("header height " + headerHeight);
 
       setPositions({
-        x: Math.round(100 * (event.clientX / dimensions.width)),
-        y: Math.round(
-          (100 * (event.clientY - headerHeight)) / dimensions.height
-        ),
+        x: Math.round(100 * (event.pageX / dimensions.width)),
+        y: Math.round((100 * (event.pageY - headerHeight)) / dimensions.height),
       });
       console.log("position-x" + positions.x + "position-y" + positions.y);
       //setCssPos sets where the user clicks so menu appears at same point
       setCssPos({
-        left: event.clientX,
-        top: event.clientY,
+        left: event.pageX,
+        top: event.pageY,
       });
       setShowhide(true);
     }
