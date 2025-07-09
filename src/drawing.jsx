@@ -271,6 +271,7 @@ function Drawing({ found, setFound, headerHeight }) {
         showMenu={showMenu}
         handleImg={handleImg}
         landscape={landscape}
+        setDimensions={setDimensions}
       />
       {/* Pop-up menu */}
       <div
