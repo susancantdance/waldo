@@ -34,10 +34,10 @@ function Drawing({ found, setFound, headerHeight }) {
         screen.orientation.type == "landscape-secondary"
       ) {
         setLandscape(true);
-        setDimensions({
-          width: myImg.current.offsetWidth,
-          height: myImg.current.offsetHeight,
-        });
+        // setDimensions({
+        //   width: myImg.current.offsetWidth,
+        //   height: myImg.current.offsetHeight,
+        // });
         console.log("landscape img width " + myImg.current.offsetWidth);
         console.log("landscape img height " + myImg.current.offsetHeight);
       }
