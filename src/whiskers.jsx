@@ -1,7 +1,9 @@
 import waldo from "./assets/waldo.jpg";
 import styles from "./drawing.module.css";
+import { useRef } from "react";
 
-function Whiskers({ myImg, showMenu, handleImg, landscape, setDimensions }) {
+function Whiskers({ showMenu, handleImg, landscape, setDimensions }) {
+  const myImg = useRef(null);
   console.log(`landscape ${landscape}`);
 
   setDimensions({
