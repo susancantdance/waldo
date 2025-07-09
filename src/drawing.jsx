@@ -27,11 +27,17 @@ function Drawing({ found, setFound, headerHeight }) {
   useEffect(() => {
     const handleOrientationChange = () => {
       // Reload the page when orientation changes
+      console.log(screen.orientation.type);
       if (
         screen.orientation.type == "landscape-primary" ||
         screen.orientation.type == "landscape-secondary"
       ) {
-        setModal(false);
+        setDimensions({
+          width: myImg.current.offsetWidth,
+          height: myImg.current.offsetHeight,
+        });
+        console.log("img width " + myImg.current.offsetWidth);
+        console.log("img height " + myImg.current.offsetHeight);
       }
     };
 
