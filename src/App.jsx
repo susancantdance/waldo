@@ -19,10 +19,10 @@ function App() {
     const handler = () => {
       window.location.reload();
     };
-    Screen.orientation.addEventListener("change", handler); // Or window resize
+    screen.orientation.addEventListener("change", handler); // Or window resize
     return () => {
       // On unmount, remove the handler
-      Screen.orientation.removeEventListener("change", handler); // Or window resize
+      screen.orientation.removeEventListener("change", handler); // Or window resize
     };
   }, []);
 
