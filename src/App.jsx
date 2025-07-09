@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 // import waldo from "./assets/waldo.jpg";
 import { Drawing } from "./drawing.jsx";
@@ -14,6 +14,18 @@ function App() {
     duke: false,
   });
   const [headerHeight, setHeaderheight] = useState(0);
+  const [reloadMe, setReloadme] = useState(false);
+
+  useEffect(() => {
+    const handler = () => {
+      setReloadme(!reloadMe);
+    };
+    screen.orientation.addEventListener("change", handler); // Or window resize
+    return () => {
+      // On unmount, remove the handler
+      screen.orientation.removeEventListener("change", handler); // Or window resize
+    };
+  }, [reloadMe]);
 
   // useEffect(() => {
   //   const handleOrientationChange = () => {
