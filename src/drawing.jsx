@@ -28,17 +28,17 @@ function Drawing({ found, setFound, headerHeight }) {
     const handleOrientationChange = () => {
       // Reload the page when orientation changes
       console.log(screen.orientation.type);
-      if (
-        screen.orientation.type == "landscape-primary" ||
-        screen.orientation.type == "landscape-secondary"
-      ) {
-        setDimensions({
-          width: myImg.current.offsetWidth,
-          height: myImg.current.offsetHeight,
-        });
-        console.log("landscape img width " + myImg.current.offsetWidth);
-        console.log("landscape img height " + myImg.current.offsetHeight);
-      }
+      // if (
+      //   screen.orientation.type == "landscape-primary" ||
+      //   screen.orientation.type == "landscape-secondary"
+      // ) {
+      setDimensions({
+        width: myImg.current.offsetWidth,
+        height: myImg.current.offsetHeight,
+      });
+      console.log("landscape img width " + myImg.current.offsetWidth);
+      console.log("landscape img height " + myImg.current.offsetHeight);
+      // }
     };
 
     screen.orientation.addEventListener("change", handleOrientationChange);
