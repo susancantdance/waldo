@@ -36,8 +36,8 @@ function Drawing({ found, setFound, headerHeight }) {
         width: myImg.current.offsetWidth,
         height: myImg.current.offsetHeight,
       });
-      console.log("landscape img width " + myImg.current.offsetWidth);
-      console.log("landscape img height " + myImg.current.offsetHeight);
+      console.log("img width " + myImg.current.offsetWidth);
+      console.log("img height " + myImg.current.offsetHeight);
       // }
     };
 
@@ -146,7 +146,7 @@ function Drawing({ found, setFound, headerHeight }) {
       setPositions({
         x: Math.round(100 * (event.clientX / dimensions.width)),
         y: Math.round(
-          (100 * (event.clientY - headerHeight)) / dimensions.height
+          (100 * Math.abs(event.clientY - headerHeight)) / dimensions.height
         ),
       });
       console.log("position-x" + positions.x + "position-y" + positions.y);
