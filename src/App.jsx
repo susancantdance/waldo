@@ -16,20 +16,31 @@ function App() {
   const [headerHeight, setHeaderheight] = useState(0);
 
   useEffect(() => {
-    const handleOrientationChange = () => {
-      // Reload the page when orientation changes
+    const handler = () => {
       window.location.reload();
     };
-
-    // Add event listener for orientation changes
-    // Alternatively, you could use 'resize' event for broader compatibility
-    window.addEventListener("orientationchange", handleOrientationChange);
-
-    // Clean up the event listener when the component unmounts
+    Screen.orientation.addEventListener("change", handler); // Or window resize
     return () => {
-      window.removeEventListener("orientationchange", handleOrientationChange);
+      // On unmount, remove the handler
+      Screen.orientation.removeEventListener("change", handler); // Or window resize
     };
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+  }, []);
+
+  // useEffect(() => {
+  //   const handleOrientationChange = () => {
+  //     // Reload the page when orientation changes
+  //     window.location.reload();
+  //   };
+
+  //   // Add event listener for orientation changes
+  //   // Alternatively, you could use 'resize' event for broader compatibility
+  //   window.addEventListener("orientationchange", handleOrientationChange);
+
+  //   // Clean up the event listener when the component unmounts
+  //   return () => {
+  //     window.removeEventListener("orientationchange", handleOrientationChange);
+  //   };
+  // }, []); // Empty dependency array ensures this effect runs only once on mount
 
   return (
     <>
