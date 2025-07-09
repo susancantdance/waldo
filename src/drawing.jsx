@@ -43,6 +43,17 @@ function Drawing({ found, setFound, headerHeight }) {
     // or if showPopup changes before the timeout completes
   }, [guessRight, guessWrong]); // Re-run effect if showPopup changes
 
+  useEffect(() => {
+    const handler = () => {
+      window.location.reload();
+    };
+    screen.orientation.addEventListener("change", handler); // Or window resize
+    return () => {
+      // On unmount, remove the handler
+      screen.orientation.removeEventListener("change", handler); // Or window resize
+    };
+  }, []);
+
   //Effect to make sure dimensions are accurate if resized / different viewports
   //   useEffect(() => {
   //     if (myImg.current) {
