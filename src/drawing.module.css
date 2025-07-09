@@ -325,6 +325,10 @@ img {
     /* visibility: hidden; */
   }
 
+  .popup {
+    width: 20vw;
+  }
+
   .leader {
     width: 35vw;
     height: auto;
