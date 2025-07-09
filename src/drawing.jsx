@@ -1,6 +1,6 @@
 import styles from "./drawing.module.css";
 import { useState, useEffect, useRef } from "react";
-import { Whiskers } from "./whiskers.jsx";
+import waldo from "./assets/waldo.jpg";
 // import { ConfettiFunc } from "./confetti";
 
 function Drawing({ found, setFound, headerHeight }) {
@@ -16,7 +16,6 @@ function Drawing({ found, setFound, headerHeight }) {
   const [top, setTop] = useState([]);
   const [guessRight, setGuessright] = useState(false);
   const [guessWrong, setGuesswrong] = useState(false);
-  const [landscape, setLandscape] = useState(false);
 
   useEffect(() => {
     // fetch(`http://localhost:3000/delete`, {
@@ -33,7 +32,6 @@ function Drawing({ found, setFound, headerHeight }) {
         screen.orientation.type == "landscape-primary" ||
         screen.orientation.type == "landscape-secondary"
       ) {
-        setLandscape(true);
         setDimensions({
           width: myImg.current.offsetWidth,
           height: myImg.current.offsetHeight,
@@ -258,20 +256,15 @@ function Drawing({ found, setFound, headerHeight }) {
   return (
     <>
       {/* where's whiskers image */}
-      {/* <div className={styles.imgdiv}>
+      <div className={styles.imgdiv}>
         <img
           ref={myImg}
           src={waldo}
           onClick={showMenu}
           onLoad={handleImg}
         ></img>
-      </div> */}
-      <Whiskers
-        ref={myImg}
-        showMenu={showMenu}
-        handleImg={handleImg}
-        landscape={landscape}
-      />
+      </div>
+
       {/* Pop-up menu */}
       <div
         className={`${styles.popup} ${showhide ? styles.show : styles.hide}`}
