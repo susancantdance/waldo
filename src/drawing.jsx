@@ -1,10 +1,10 @@
 import styles from "./drawing.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Whiskers } from "./whiskers.jsx";
 // import { ConfettiFunc } from "./confetti";
 
 function Drawing({ found, setFound, headerHeight }) {
-  // const myImg = useRef(null);
+  const myImg = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [showhide, setShowhide] = useState(false);
   const [cssPos, setCssPos] = useState({ left: 0, top: 0 });
@@ -34,12 +34,12 @@ function Drawing({ found, setFound, headerHeight }) {
         screen.orientation.type == "landscape-secondary"
       ) {
         setLandscape(true);
-        // setDimensions({
-        //   width: myImg.current.offsetWidth,
-        //   height: myImg.current.offsetHeight,
-        // });
-        // console.log("landscape img width " + myImg.current.offsetWidth);
-        // console.log("landscape img height " + myImg.current.offsetHeight);
+        setDimensions({
+          width: myImg.current.offsetWidth,
+          height: myImg.current.offsetHeight,
+        });
+        console.log("landscape img width " + myImg.current.offsetWidth);
+        console.log("landscape img height " + myImg.current.offsetHeight);
       }
     };
 
@@ -267,11 +267,10 @@ function Drawing({ found, setFound, headerHeight }) {
         ></img>
       </div> */}
       <Whiskers
-        // myImg={myImg}
+        ref={myImg}
         showMenu={showMenu}
         handleImg={handleImg}
         landscape={landscape}
-        setDimensions={setDimensions}
       />
       {/* Pop-up menu */}
       <div
