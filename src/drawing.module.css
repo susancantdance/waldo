@@ -176,9 +176,9 @@ img {
   padding: 20px;
 }
 
-/* .portrait {
+.portrait {
   visibility: hidden;
-} */
+}
 
 @media (max-width: 599px) {
   .portrait {
