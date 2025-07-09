@@ -14,6 +14,27 @@ function Legend({ found, setHeaderheight }) {
     }
   }, [setHeaderheight]);
 
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      console.log(screen.orientation.type);
+
+      if (headerRef.current) {
+        setHeaderheight(headerRef.current.clientHeight);
+      }
+      console.log(
+        "header height after orientation change " +
+          headerRef.current.clientHeight
+      );
+    };
+
+    screen.orientation.addEventListener("change", handleOrientationChange);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      screen.orientation.removeEventListener("change", handleOrientationChange);
+    };
+  }, [setHeaderheight]);
+
   return (
     <div ref={headerRef} className={styles.container}>
       <div className={styles.leftside}>
