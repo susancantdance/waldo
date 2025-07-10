@@ -16,7 +16,7 @@ function Legend({ found, setHeaderheight }) {
 
   useEffect(() => {
     const handleOrientationChange = () => {
-      console.log(screen.orientation.type);
+      // console.log(screen.orientation.type);
 
       if (headerRef.current) {
         setHeaderheight(headerRef.current.clientHeight);
@@ -27,11 +27,11 @@ function Legend({ found, setHeaderheight }) {
       );
     };
 
-    screen.orientation.addEventListener("change", handleOrientationChange);
+    window.addEventListener("resize", handleOrientationChange);
 
     // Clean up the event listener when the component unmounts
     return () => {
-      screen.orientation.removeEventListener("change", handleOrientationChange);
+      window.removeEventListener("resize", handleOrientationChange);
     };
   }, [setHeaderheight]);
 
