@@ -41,11 +41,11 @@ function Drawing({ found, setFound, headerHeight }) {
       // }
     };
 
-    screen.orientation.addEventListener("change", handleOrientationChange);
+    window.addEventListener("resize", handleOrientationChange);
 
     // Clean up the event listener when the component unmounts
     return () => {
-      screen.orientation.removeEventListener("change", handleOrientationChange);
+      window.removeEventListener("resize", handleOrientationChange);
     };
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
