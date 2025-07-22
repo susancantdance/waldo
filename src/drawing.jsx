@@ -337,7 +337,7 @@ function Drawing({ found, setFound, headerHeight }) {
         className={`${styles.portrait} ${modal ? styles.show : styles.hide}`}
       >
         <span className={styles.start}>Wait!</span>
-        <span className={styles.message}>(Flip your phone to landscape!)</span>
+        <span className={styles.start}>(Flip your phone to landscape!)</span>
       </div>
 
       {/* confetti */}
